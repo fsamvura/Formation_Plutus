@@ -24,8 +24,8 @@ import PlutusTx.Prelude qualified as PlutusPrelude
 -- serialiseData is a PlutusV2 builtin
 
 {-# INLINABLE mkValidator #-}
-mkValidator :: BuiltinData -> Integer -> V2.ScriptContext -> Bool
-mkValidator _ redeemer _ = traceIfFalse "Le Redempteur est Incorrect" $ redeemer PlutusPrelude.== 42
+mkValidator :: Integer -> Integer -> V2.ScriptContext -> Bool
+mkValidator datum redeemer _ = traceIfFalse "Le Redempteur est Incorrect" $ redeemer PlutusPrelude.== datum
   
 
 validator :: Plutus.Validator
