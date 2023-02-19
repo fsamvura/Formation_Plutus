@@ -1,0 +1,21 @@
+44
+8e491db6ce288218af2d8b110f12b8f7e0bd207e8a9e46d9f9b0df42ad2640e6
+
+testnet="testnet-magic 1"
+txhash="f082f87e51b736409e8882fa6b8b2f1bbf7ce132775ad662121865bea69764ee"
+txix="0"
+s_address=$(cat plutus-red-egal-dat.addr)
+s_output="100000000"
+col="5000000"
+address=$(cat portefueille1.addr)
+cardano-cli transaction build --babbage-era --$testnet  --tx-in $txhash#$txix --tx-out $address+$col --tx-out $s_address+$s_output  --tx-out-datum-hash 8e491db6ce288218af2d8b110f12b8f7e0bd207e8a9e46d9f9b0df42ad2640e6  --change-address $address --out-file tx.raw
+
+cardano-cli transaction sign --signing-key-file portefeuille1.skey --$testnet --tx-body-file tx.raw --out-file tx.signed
+
+cons="8b63bc22922e5dbdf550cefb8e3a2d6106759bc9bbad76cad3523a7482aab035#1"
+col="8b63bc22922e5dbdf550cefb8e3a2d6106759bc9bbad76cad3523a7482aab035#0"
+payant="8b63bc22922e5dbdf550cefb8e3a2d6106759bc9bbad76cad3523a7482aab035#2"
+
+cardano-cli transaction build --babbage-era --$testnet --tx-in $cons --tx-in-script-file plutus-red-egal-dat.plutus --tx-in-datum-value 44 --tx-in-redeemer-value 42  --tx-in-collateral $col --change-address $address --protocol-params-file protocol.json --out-file tx_rd.body
+
+cardano-cli transaction sign --signing-key-file portefeuille1.skey --$testnet --tx-body-file tx_rd.body --out-file tx_rd.signed

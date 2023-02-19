@@ -25,7 +25,7 @@ import PlutusTx.Prelude qualified as PlutusPrelude
 
 {-# INLINABLE mkValidator #-}
 mkValidator :: Integer -> Integer -> V2.ScriptContext -> Bool
-mkValidator datum redeemer _ = traceIfFalse "Le Redempteur est Incorrect" $ redeemer PlutusPrelude.== datum
+mkValidator datum redeemer _ = traceIfFalse "Le Redempteur est different du Datum" $ redeemer PlutusPrelude.== datum
   
 
 validator :: Plutus.Validator
