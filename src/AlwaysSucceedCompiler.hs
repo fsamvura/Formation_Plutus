@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TypeApplications #-}
 
-module ContratLibreCompiler where
+module AlwaysSucceedCompiler where
 
 import              Prelude (FilePath, IO)
 import              Cardano.Api
@@ -18,7 +18,7 @@ import qualified    PlutusTx
 import              PlutusTx.Prelude
 
 
-import qualified ContratLibreValidator
+import qualified AlwaysSucceedValidator
 
 -- If we do not import Ledger, then
 -- how to replace Ledger.Validator?
@@ -26,5 +26,5 @@ import qualified ContratLibreValidator
 writeValidator :: FilePath -> Plutus.V2.Ledger.Api.Validator -> IO (Either (FileError ()) ())
 writeValidator file = writeFileTextEnvelope @(PlutusScript PlutusScriptV2) file Nothing . PlutusScriptSerialised . SBS.toShort . LBS.toStrict . serialise . Plutus.V2.Ledger.Api.unValidatorScript
 
-writeContratLibreScript :: IO (Either (FileError ()) ())
-writeContratLibreScript = writeValidator "output/plutus-red-egal-dat.plutus" ContratLibreValidator.validator
+writeAlwaysSucceedScript :: IO (Either (FileError ()) ())
+writeAlwaysSucceedScript = writeValidator "output/alwayssucceed_apr29.plutus" AlwaysSucceedValidator.validator

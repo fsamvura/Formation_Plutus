@@ -1,5 +1,5 @@
 cabal-version:      2.4
-name:               contrat-libre-plutus-v2
+name:               always-succeed-plutus-v2
 version:            0.1.0.0
 description:        Apprendre Plutus avec la version V2.
 license:            Apache-2.0
@@ -44,8 +44,8 @@ library
 
   hs-source-dirs:       src
 
-  exposed-modules:      ContratLibreValidator
-                        ContratLibreCompiler
+  exposed-modules:      AlwaysSucceedCompiler
+                        AlwaysSucceedValidator
 
   build-depends:        bytestring
                       , cardano-api
